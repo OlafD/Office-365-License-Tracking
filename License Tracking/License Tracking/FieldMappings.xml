@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FieldMappings>
+  <Field DisplayName="Dummy" InternalName="Field00" Id="{6634a0d2-7d71-4acb-b02c-ccd50bb69d6b}" SkuPartNumber="Dummy" FieldNumber="0" />
+  <Field DisplayName="WIN10_VDA_E5 Available" InternalName="Field001" Id="{c8d9fcbd-d070-4607-b60b-34645bac7840}" SkuPartNumber="WIN10_VDA_E5" FieldNumber="1" />
+  <Field DisplayName="WIN10_VDA_E5 Current" InternalName="Field002" Id="{b818c11f-b8f9-4944-a481-acffb14e7963}" SkuPartNumber="WIN10_VDA_E5" FieldNumber="2" />
+  <Field DisplayName="EMSPREMIUM Available" InternalName="Field003" Id="{d7a69abf-8beb-4a3a-9be3-7476d1e77c85}" SkuPartNumber="EMSPREMIUM" FieldNumber="3" />
+  <Field DisplayName="EMSPREMIUM Current" InternalName="Field004" Id="{1b62bf36-d6f6-4c45-ac60-bd3bc86e3fea}" SkuPartNumber="EMSPREMIUM" FieldNumber="4" />
+  <Field DisplayName="ENTERPRISEPREMIUM Available" InternalName="Field005" Id="{7035c421-f77a-43b0-928f-ba108c50c593}" SkuPartNumber="ENTERPRISEPREMIUM" FieldNumber="5" />
+  <Field DisplayName="ENTERPRISEPREMIUM Current" InternalName="Field006" Id="{5eeb158f-6fd5-4ae9-b8c5-158804a83e29}" SkuPartNumber="ENTERPRISEPREMIUM" FieldNumber="6" />
+  <Field DisplayName="FLOW_FREE Available" InternalName="Field007" Id="{8f036dc7-d1bc-44b1-b464-cfb909767e1c}" SkuPartNumber="FLOW_FREE" FieldNumber="7" />
+  <Field DisplayName="FLOW_FREE Current" InternalName="Field008" Id="{e7074549-9e69-49e2-bb0b-a99a4d26427d}" SkuPartNumber="FLOW_FREE" FieldNumber="8" />
+</FieldMappings>
