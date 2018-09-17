@@ -21,6 +21,24 @@ function IsMsolServiceConnected
 	return ($values -ne $null)
 }
 
+Function TestSPOConnection
+{
+	$result = $false
+	
+	Try
+	{
+		$ctx = Get-PnPContext
+
+		$result = $true
+	}
+	Catch
+	{
+		$result = $false
+	}
+
+	Return $result
+}
+
 function LoadXmlDocument
 {
 	param (
@@ -140,7 +158,6 @@ function GetReceipientForSku
 #------- Main -------
 
 Import-Module MSOnline
-Import-Module PBSPOPS
 
 if ((IsMsolServiceConnected) -eq $false)
 {
@@ -148,7 +165,7 @@ if ((IsMsolServiceConnected) -eq $false)
 	Exit
 }
 
-if ((Test-PBSPOConnection) -eq $false)
+if ((TestSPOConnection) -eq $false)
 {
 	Write-Host -ForegroundColor Red "No connection to a SharePoint Online site collection. Processing stopped."
 	Exit

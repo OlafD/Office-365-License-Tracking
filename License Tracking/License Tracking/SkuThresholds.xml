@@ -1,8 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SkuThresholds DefaultReceipient="LicenseAlerting@M365x877207.onmicrosoft.com">
   <Sku Name="abc" Threshold="0" Receipient="LicenseAlerting@M365x877207.onmicrosoft.com" />
-  <Sku Name="EMSPREMIUM" FriendlyName="EMSPREMIUM" Threshold="0" Receipient="LicenseAlerting@M365x877207.onmicrosoft.com" />
-  <Sku Name="ENTERPRISEPREMIUM" FriendlyName="ENTERPRISEPREMIUM" Threshold="0" Receipient="LicenseAlerting@M365x877207.onmicrosoft.com" />
-  <Sku Name="ENTERPRISEPACK" FriendlyName="ENTERPRISEPACK" Threshold="0" Receipient="LicenseAlerting@M365x877207.onmicrosoft.com" />
-  <Sku Name="Win10_VDA_E3" FriendlyName="Win10_VDA_E3" Threshold="0" Receipient="LicenseAlerting@M365x877207.onmicrosoft.com" />
 </SkuThresholds>

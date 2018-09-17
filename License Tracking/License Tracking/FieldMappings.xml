@@ -1,12 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FieldMappings>
   <Field DisplayName="Dummy" InternalName="Field00" Id="{6634a0d2-7d71-4acb-b02c-ccd50bb69d6b}" SkuPartNumber="Dummy" FieldNumber="0" />
-  <Field DisplayName="EMSPREMIUM Available" InternalName="Field001" Id="{a83c3444-c657-4bff-a491-4757d7d0ee2c}" SkuPartNumber="EMSPREMIUM" FieldNumber="1" />
-  <Field DisplayName="EMSPREMIUM Current" InternalName="Field002" Id="{95bb6e44-668b-474b-818c-5659ecff39b9}" SkuPartNumber="EMSPREMIUM" FieldNumber="2" />
-  <Field DisplayName="ENTERPRISEPREMIUM Available" InternalName="Field003" Id="{644596d4-2ade-4328-b01c-18b21bde3fb2}" SkuPartNumber="ENTERPRISEPREMIUM" FieldNumber="3" />
-  <Field DisplayName="ENTERPRISEPREMIUM Current" InternalName="Field004" Id="{ff58a737-d31b-460f-8404-c0f3334e7c5d}" SkuPartNumber="ENTERPRISEPREMIUM" FieldNumber="4" />
-  <Field DisplayName="ENTERPRISEPACK Available" InternalName="Field005" Id="{9c22dabc-f000-4467-a596-56f40437d726}" SkuPartNumber="ENTERPRISEPACK" FieldNumber="5" />
-  <Field DisplayName="ENTERPRISEPACK Current" InternalName="Field006" Id="{a2990506-090f-4ec7-b60b-7cfababd78a8}" SkuPartNumber="ENTERPRISEPACK" FieldNumber="6" />
-  <Field DisplayName="Win10_VDA_E3 Available" InternalName="Field007" Id="{2d03ddb7-b985-436d-b28f-d1d8727f184c}" SkuPartNumber="Win10_VDA_E3" FieldNumber="7" />
-  <Field DisplayName="Win10_VDA_E3 Current" InternalName="Field008" Id="{4126f06a-e1f9-481e-96cb-20c6c9c351d2}" SkuPartNumber="Win10_VDA_E3" FieldNumber="8" />
 </FieldMappings>

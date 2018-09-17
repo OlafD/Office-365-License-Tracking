@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LicenseTracking>
   <!-- Url of the SharePoint site collection, where the data should be stored -->
-  <Url>https://m365x877207.sharepoint.com/sites/LicenseAlerting</Url>
+  <Url>https://your_tenant_here.sharepoint.com/sites/LicenseAlerting</Url>
   <!-- Name of the list in the SharePoint site collection, where the data should be stored -->
   <Listname>License Tracking</Listname>
   <!-- Path for the transcript files -->
