@@ -1,11 +1,15 @@
 param (
 	[Parameter(Mandatory=$true)]
-	[string]$TranscriptPath
+	[string]$Listname,
+	[Parameter(Mandatory=$true)]
+	[string]$TranscriptPath,
+	[Parameter(Mandatory=$true)]
+	$Credentials
 )
 
 #------- Constants -------
 
-$LICENSE_TRACKING_LIST = "License Tracking"
+$LICENSE_TRACKING_LIST = $Listname
 
 
 #------- Functions -------
@@ -159,7 +163,7 @@ $currentTimestamp = ([DateTime]::Now).ToString("dd.MM.yyyy")
 
 $accountSkuCollection = Get-MsolAccountSku
 
-Write-Host "Found " + $accountSkuCollection.Count + " items for account sku"
+Write-Host "Found" $accountSkuCollection.Count "items for account sku"
 
 $hashValues = @{}
 $hashValues.Add("Title", $currentTimestamp)
@@ -208,20 +212,11 @@ else
 
 	$receipient = GetDefaultReceipient
 
-	. .\SendMail.ps1 -MailType SkuAlert -SkuToNotify $skuToNotify -Receipient $receipient
-
-	<#
-	foreach ($sku in $skuToNotify.Keys)
-	{
-		$currentValue = $skuToNotify[$sku]
-		$receipient = GetReceipientForSku -Sku $sku
-
-		Write-Host -NoNewline "Send mail to $receipient "
-		Write-Host -ForegroundColor Magenta "=> TODO"
-	}
-	#>
+	. .\SendMail.ps1 -MailType SkuAlert -SkuToNotify $skuToNotify -Receipient $receipient -Credentials $Credentials
 }
 
 Write-Host -ForegroundColor Green "Done."
 
 Stop-Transcript
+
+Write-Output $item.Id

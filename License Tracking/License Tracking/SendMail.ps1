@@ -4,7 +4,9 @@ param (
 	[Parameter(Mandatory=$true)]
 	[Hashtable]$SkuToNotify,
 	[Parameter(Mandatory=$true)]
-	[string]$Receipient
+	[string]$Receipient,
+	[Parameter(Mandatory=$true)]
+	$Credentials
 )
 
 $NEW_SKU_SUBJECT = "New Sku in license alerting"
@@ -43,6 +45,30 @@ $SKU_ALERT_BODY = @"
 <div>The Office 365 License Management Service.</div>
 "@
 
+function GetValueFromXml
+{
+	param (
+		[Parameter(Mandatory=$true)]
+		[string]$NodeName,
+		[string]$XmlFilename = "$PSScriptRoot\LicenseTrackingParam.xml"
+	)
+
+	$result = ""
+
+	$xmlDoc = New-Object System.Xml.XmlDocument
+	$xmlDoc.Load($XmlFilename)
+	$rootNode = $xmlDoc.DocumentElement
+
+	$node = $rootNode.SelectSingleNode("//LicenseTracking/$NodeName")
+
+	if ($node -ne $null)
+	{
+		$result = $node.InnerText
+	}
+
+	return $result
+}
+
 function CreateSkuAlertPlaceholder
 {
 	param (
@@ -54,8 +80,8 @@ function CreateSkuAlertPlaceholder
 
 	foreach ($sku in $SkuToNotify.Keys)
 	{
-		$skuFriendlyName = GetFriendlyNameForSku -Sku $SkuToNotify[$sku]
-		$skuThreshold = GetThresholdForSku -Sku $SkuToNotify[$sku]
+		$skuFriendlyName = GetFriendlyNameForSku -Sku $sku
+		$skuThreshold = GetThresholdForSku -Sku $sku
 		$skuValue = $SkuToNotify[$sku]
 
 		$line = "$skuFriendlyName ($sku) - The thresshold, set at $skuThreshold, has been exceeded and <span style='font-weight: bold;'>the current ammount of available licenses is only $skuValue.</span>"
@@ -160,8 +186,8 @@ switch ($MailType)
 	}
 	"NewSku"
 	{
-		$body = $NEW_SKU_BODY.Replace("[*license_placeholder*]", $placeholderValue)
 		$placeholderValue = CreateNewSkuPlaceholder -SkuToNotify $SkuToNotify
+		$body = $NEW_SKU_BODY.Replace("[*license_placeholder*]", $placeholderValue)
 		$subject = $NEW_SKU_SUBJECT
 		break;
 	}
@@ -169,4 +195,9 @@ switch ($MailType)
 
 Write-Host "Send mail to $Receipient"
 
-Send-PnPMail -To $Receipient -Subject $subject -Body $body
+$smtpServer = GetValueFromXml -NodeName "SmtpServer"
+$smtpPort = GetValueFromXml -NodeName "SmtpPort"
+$ctx = Get-PnPContext
+$from = $ctx.Credentials.UserName
+
+Send-MailMessage -From $from -To $Receipient -Subject $subject -Body $body -BodyAsHtml -SmtpServer $smtpServer -Port $smtpPort -Credential $Credentials -UseSsl

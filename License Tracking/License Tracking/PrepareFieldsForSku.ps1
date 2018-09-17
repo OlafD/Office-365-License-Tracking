@@ -1,11 +1,15 @@
 ﻿param (
 	[Parameter(Mandatory=$true)]
-	[string]$TranscriptPath
+	[string]$Listname,
+	[Parameter(Mandatory=$true)]
+	[string]$TranscriptPath,
+	[Parameter(Mandatory=$true)]
+	$Credentials
 )
 
 #------- Constants -------
 
-$LICENSE_TRACKING_LIST = "License Tracking"
+$LICENSE_TRACKING_LIST = $Listname
 
 
 #------- Functions -------
@@ -246,7 +250,7 @@ $newSkuNotification = @{}
 
 $accountSkuCollection = Get-MsolAccountSku
 
-Write-Host "Found " + $accountSkuCollection.Count + " items for account sku"
+Write-Host "Found" $accountSkuCollection.Count "items for account sku"
 
 foreach ($accountSku in $accountSkuCollection)
 {
@@ -307,17 +311,7 @@ if ($newSkuNotification.Count -gt 0)
 {
 	$receipient = GetDefaultReceipient
 
-	. .\SendMail.ps1 -MailType NewSku -SkuToNotify $newSkuNotification -Receipient $receipient
-
-	<#
-	foreach ($key in $newSkuNotification.Keys)
-	{
-		$receipient = GetReceipientForSku -Sku $key
-
-		Write-Host -NoNewline "Send new sku notification for $key to $receipient "
-		Write-Host -ForegroundColor Magenta "=> TODO"
-	}
-	#>
+	. .\SendMail.ps1 -MailType NewSku -SkuToNotify $newSkuNotification -Receipient $receipient -Credentials $Credentials
 }
 
 Write-Host -ForegroundColor Green "Done."

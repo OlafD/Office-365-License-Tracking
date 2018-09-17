@@ -34,12 +34,14 @@
     <Compile Include="Iteration1\CreateList.ps1" />
     <Compile Include="PrepareFieldsForSku.ps1" />
     <Compile Include="ReadAccountSkuFromTenant.ps1" />
+    <Compile Include="RunLicenseTracking.ps1" />
     <Compile Include="SendMail.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FieldMappings.xml" />
     <Content Include="FieldTemplate.xml" />
     <Content Include="Iteration1\Columns\CheckDate.xml" />
+    <Content Include="LicenseTrackingParam.xml" />
     <Content Include="SkuThresholds.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
