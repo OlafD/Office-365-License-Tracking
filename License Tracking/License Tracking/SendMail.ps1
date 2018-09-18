@@ -45,6 +45,24 @@ $SKU_ALERT_BODY = @"
 <div>The Office 365 License Management Service.</div>
 "@
 
+Function TestSPOConnection
+{
+	$result = $false
+	
+	Try
+	{
+		$ctx = Get-PnPContext
+
+		$result = $true
+	}
+	Catch
+	{
+		$result = $false
+	}
+
+	Return $result
+}
+
 function GetValueFromXml
 {
 	param (
@@ -167,9 +185,7 @@ function GetFriendlyNameForSku
 
 #------- Main -------
 
-Import-Module PBSPOPS
-
-if ((Test-PBSPOConnection) -eq $false)
+if ((TestSPOConnection) -eq $false)
 {
 	Write-Host -ForegroundColor Red "No connection to a SharePoint Online site collection. Processing stopped."
 	Exit
@@ -198,6 +214,6 @@ Write-Host "Send mail to $Receipient"
 $smtpServer = GetValueFromXml -NodeName "SmtpServer"
 $smtpPort = GetValueFromXml -NodeName "SmtpPort"
 $ctx = Get-PnPContext
-$from = $ctx.Credentials.UserName
+$from = $Credentials.UserName
 
 Send-MailMessage -From $from -To $Receipient -Subject $subject -Body $body -BodyAsHtml -SmtpServer $smtpServer -Port $smtpPort -Credential $Credentials -UseSsl
