@@ -1,6 +1,5 @@
 ﻿param (
-	[Parameter(Mandatory=$true)]
-	[string]$Listname,
+	[string]$Listname = "License Tracking",
 	[Parameter(Mandatory=$true)]
 	[string]$TranscriptPath,
 	[Parameter(Mandatory=$true)]

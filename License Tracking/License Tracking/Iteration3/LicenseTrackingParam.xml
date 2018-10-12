@@ -4,6 +4,8 @@
   <Url>https://your_tenant_here.sharepoint.com/sites/LicenseAlerting</Url>
   <!-- Name of the list in the SharePoint site collection, where the data should be stored -->
   <Listname>License Tracking</Listname>
+  <!-- Name of the list in the SharePoint site collection, where the data per Sku should be stored -->
+  <ListnamePerSku>License Tracking per Sku</ListnamePerSku>
   <!-- Path for the transcript files -->
   <TranscriptPath>C:\Transcripts</TranscriptPath>
   <!-- the default receipient for mails -->

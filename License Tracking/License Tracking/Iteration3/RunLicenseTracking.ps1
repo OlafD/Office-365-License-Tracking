@@ -25,6 +25,7 @@ function GetValueFromXml
 
 $url = GetValueFromXml -NodeName "Url"
 $listname = GetValueFromXml -NodeName "Listname"
+$listnamePerSku = GetValueFromXml -NodeName "ListnamePerSku"
 $transcriptPath = GetValueFromXml -NodeName "TranscriptPath"
 $defaultReceipient = GetValueFromXml -NodeName "DefaultReceipient"
 
@@ -39,8 +40,10 @@ Connect-MsolService -Credential $cred
 
 # run the scripts for schema changes and the license tracking itself
 
-. .\PrepareFieldsForSku.ps1 -Listname $listname -TranscriptPath $transcriptPath -DefaultReceipient $defaultReceipient -Credentials $cred
+# the script will use the default values for the list to store the values, so the parameter Listname is not needed
+. .\PrepareFieldsForSku.ps1 -TranscriptPath $transcriptPath -DefaultReceipient $defaultReceipient -Credentials $cred
 
+# the script will use the default values for the lists to store the values, so the parameters Listname and ListnamePerSku are not needed
 $itemId = . .\ReadAccountSkuFromTenant.ps1 -TranscriptPath $transcriptPath -DefaultReceipient $defaultReceipient -Credentials $cred
 
 Write-Host -ForegroundColor Green "Done."
