@@ -1,0 +1,12 @@
+<Field
+	ID="{99b45184-9fb3-496e-b61b-1ff0a3a6e20e}"
+	Type="Text"
+	Name="InternalName"
+	DisplayName="InternalName"
+	StaticName="InternalName"
+	Group=""
+	Description=""
+  ShowInNewForm="FALSE"
+  ShowInEditForm="FALSE"
+	Hidden="false">
+</Field>

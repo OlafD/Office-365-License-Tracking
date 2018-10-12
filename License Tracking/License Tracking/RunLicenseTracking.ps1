@@ -26,6 +26,7 @@ function GetValueFromXml
 $url = GetValueFromXml -NodeName "Url"
 $listname = GetValueFromXml -NodeName "Listname"
 $transcriptPath = GetValueFromXml -NodeName "TranscriptPath"
+$defaultReceipient = GetValueFromXml -NodeName "DefaultReceipient"
 
 # for unattended execution, add a mechanism to create the credential object
 $cred = Get-Credential 
@@ -38,8 +39,8 @@ Connect-MsolService -Credential $cred
 
 # run the scripts for schema changes and the license tracking itself
 
-. .\PrepareFieldsForSku.ps1 -Listname $listname -TranscriptPath $transcriptPath -Credentials $cred
+. .\PrepareFieldsForSku.ps1 -Listname $listname -TranscriptPath $transcriptPath -DefaultReceipient $defaultReceipient -Credentials $cred
 
-$itemId = . .\ReadAccountSkuFromTenant.ps1 -Listname $listname -TranscriptPath $transcriptPath -Credentials $cred
+$itemId = . .\ReadAccountSkuFromTenant.ps1 -Listname $listname -TranscriptPath $transcriptPath -DefaultReceipient $defaultReceipient -Credentials $cred
 
 Write-Host -ForegroundColor Green "Done."

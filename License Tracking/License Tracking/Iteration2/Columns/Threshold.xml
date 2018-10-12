@@ -1,0 +1,14 @@
+<Field
+	ID="{61664e41-1452-4e95-8bba-36aa40a3cc8a}"
+	Type="Number"
+	Name="Threshold"
+	DisplayName="Threshold"
+	StaticName="Threshold"
+	Group=""
+	Description=""
+	Hidden="false"
+	ShowInNewForm="TRUE"
+	ShowInEditForm="TRUE"
+	Decimals="0">
+  <Default>0</Default>
+</Field>

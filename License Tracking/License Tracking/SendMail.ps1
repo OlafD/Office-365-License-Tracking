@@ -45,6 +45,9 @@ $SKU_ALERT_BODY = @"
 <div>The Office 365 License Management Service.</div>
 "@
 
+<#
+ test the connection to SharePoint Online
+#>
 Function TestSPOConnection
 {
 	$result = $false
@@ -87,6 +90,9 @@ function GetValueFromXml
 	return $result
 }
 
+<#
+ prepare the placeholder for the Skus for the notification mail
+#>
 function CreateSkuAlertPlaceholder
 {
 	param (
@@ -109,6 +115,10 @@ function CreateSkuAlertPlaceholder
 	return $result
 }
 
+
+<#
+ prepare the placeholder for new Skus for the notification mail
+#>
 function CreateNewSkuPlaceholder
 {
 	param (
@@ -127,6 +137,9 @@ function CreateNewSkuPlaceholder
 	return $result
 }
 
+<#
+ for an Sku get the configured threshold
+#>
 function GetThresholdForSku
 {
 	param (
@@ -137,24 +150,25 @@ function GetThresholdForSku
 
 	$result = 0
 
-	$xmlDoc = LoadXmlDocument -Filename $ThresholdFile
-	$xmlRoot = $xmlDoc.DocumentElement
+	$camlQuery = "<Eq><FieldRef Name='Title' /><Value Type='Text'>$Sku</Value></Eq>"
 
-	$xpath = "//SkuThresholds/Sku[@Name='$Sku']"
-	$node = $xmlRoot.SelectSingleNode($xpath)
+	$item = GetListItems -Listname "Sku Thresholds" -WhereNode $camlQuery
 
-	if ($node -eq $null)
+	if ($item -eq $null)
 	{
-		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold file $ThresholdFile"
+		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold list."
 	}
 	else
 	{
-		$result = [int]$node.Threshold
+		$result = [int]$item["Threshold"]
 	}
 
 	return $result
 }
 
+<#
+ for an Sku get the configured friendly name
+#>
 function GetFriendlyNameForSku
 {
 	param (
@@ -165,22 +179,37 @@ function GetFriendlyNameForSku
 
 	$result = $Sku
 
-	$xmlDoc = LoadXmlDocument -Filename $ThresholdFile
-	$xmlRoot = $xmlDoc.DocumentElement
+	$camlQuery = "<Eq><FieldRef Name='Title' /><Value Type='Text'>$Sku</Value></Eq>"
 
-	$xpath = "//SkuThresholds/Sku[@Name='$Sku']"
-	$node = $xmlRoot.SelectSingleNode($xpath)
+	$item = GetListItems -Listname "Sku Thresholds" -WhereNode $camlQuery
 
-	if ($node -eq $null)
+	if ($item -eq $null)
 	{
-		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold file $ThresholdFile"
+		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold list."
 	}
 	else
 	{
-		$result = $node.FriendlyName
+		$result = $item["FriendlyName"]
 	}
 
 	return $result
+}
+
+<#
+ run a query on a list an return the result set
+#>
+function GetListItems
+{
+	param (
+		[string]$Listname,
+		[string]$WhereNode
+	)
+
+	$camlQuery = "<View><Query><Where>$WhereNode</Where></Query></View>"
+
+	$result = Get-PnPListItem -List $Listname -Query $camlQuery
+
+    return $result
 }
 
 #------- Main -------

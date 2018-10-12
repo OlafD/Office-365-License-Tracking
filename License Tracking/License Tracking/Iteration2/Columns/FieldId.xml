@@ -1,0 +1,12 @@
+<Field
+	ID="{aa53a2fc-f755-4a7e-9925-8648c594c8ff}"
+	Type="Text"
+	Name="FieldId"
+	DisplayName="FieldId"
+	StaticName="FieldId"
+	Group=""
+	Description=""
+  ShowInNewForm="FALSE"
+  ShowInEditForm="FALSE"
+	Hidden="false">
+</Field>

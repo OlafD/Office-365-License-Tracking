@@ -1,0 +1,12 @@
+<Field
+	ID="{1fa63450-7319-4aae-a28a-a28d3d4d79df}"
+	Type="Text"
+	Name="Receipient"
+	DisplayName="Receipient"
+	StaticName="Receipient"
+	Group=""
+	Description=""
+  ShowInNewForm="TRUE"
+  ShowInEditForm="TRUE"
+	Hidden="false">
+</Field>

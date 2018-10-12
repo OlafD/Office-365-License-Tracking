@@ -4,6 +4,8 @@ param (
 	[Parameter(Mandatory=$true)]
 	[string]$TranscriptPath,
 	[Parameter(Mandatory=$true)]
+	[string]$DefaultReceipient,
+	[Parameter(Mandatory=$true)]
 	$Credentials
 )
 
@@ -14,6 +16,9 @@ $LICENSE_TRACKING_LIST = $Listname
 
 #------- Functions -------
 
+<#
+ test the connection the the MSOL Service
+#>
 function IsMsolServiceConnected
 {
     $values = Get-MsolAccountSku -ErrorAction SilentlyContinue
@@ -21,6 +26,9 @@ function IsMsolServiceConnected
 	return ($values -ne $null)
 }
 
+<#
+ test the connection to SharePoint Online
+#>
 Function TestSPOConnection
 {
 	$result = $false
@@ -52,25 +60,33 @@ function LoadXmlDocument
 	return $xmlDoc
 }
 
+<#
+ get the internal name for a field by the DisplayName of the field
+#>
 function GetInternalFieldname
 {
 	param (
 		[Parameter(Mandatory=$true)]
-		[string]$DisplayName,
-		[string]$fieldMappingsFile = "$PSScriptRoot\FieldMappings.xml"
+		[string]$DisplayName
 	)
 
-	$xmlDoc = LoadXmlDocument -Filename $fieldMappingsFile
-	$xmlRoot = $xmlDoc.DocumentElement
+	$result = ""
 
-	$xpath = "//FieldMappings/Field[@DisplayName='$DisplayName']"
-	$node = $xmlRoot.SelectSingleNode($xpath)
+	$camlQuery = "<Eq><FieldRef Name='DisplayName' /><Value Type='Text'>$DisplayName</Value></Eq>"
 
-	$result = $node.InternalName
+	$item = GetListItems -Listname "Field Mappings" -WhereNode $camlQuery
+
+	if ($item -ne $null)
+	{
+		$result = $item["InternalName"]
+	}
 
 	return $result
 }
 
+<#
+ test, whether the available units are below the threshold set for an Sku
+#>
 function TestThresholdForSku
 {
 	param (
@@ -79,25 +95,22 @@ function TestThresholdForSku
 		[Parameter(Mandatory=$true)]
 		[int]$AcvailableUnits,
 		[Parameter(Mandatory=$true)]
-		[int]$CurrentUnits,
-		[string]$ThresholdFile = "$PSScriptRoot\SkuThresholds.xml"
+		[int]$CurrentUnits
 	)
 
 	$result = 0
 
-	$xmlDoc = LoadXmlDocument -Filename $ThresholdFile
-	$xmlRoot = $xmlDoc.DocumentElement
+	$camlQuery = "<Eq><FieldRef Name='Title' /><Value Type='Text'>$Sku</Value></Eq>"
 
-	$xpath = "//SkuThresholds/Sku[@Name='$Sku']"
-	$node = $xmlRoot.SelectSingleNode($xpath)
+	$item = GetListItems -Listname "Sku Thresholds" -WhereNode $camlQuery
 
-	if ($node -eq $null)
+	if ($item -eq $null)
 	{
-		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold file $ThresholdFile"
+		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold list."
 	}
 	else
 	{
-		$threshold = $node.Threshold
+		$threshold = $item["Threshold"]
 
 		if ($threshold -ne "0")
 		{
@@ -114,45 +127,59 @@ function TestThresholdForSku
 	return $result
 }
 
+<#
+ return the default receipient configured for this tool
+#>
 function GetDefaultReceipient
 {
-	param (
-		[string]$ThresholdsFile = "$PSScriptRoot\SkuThresholds.xml"
-	)
-
-	$xmlDoc = LoadXmlDocument -Filename $ThresholdsFile
-
-	$defaultReceipient = $xmlDoc.SkuThresholds.DefaultReceipient
-
-	return $defaultReceipient
+	return $DefaultReceipient
 }
 
+<#
+ Get the reciepient for an Sku from the "Sku Thresholds" list
+#>
 function GetReceipientForSku
 {
 	param (
 		[Parameter(Mandatory=$true)]
 		[string]$Sku,
-		[string]$ThresholdFile = "$PSScriptRoot\SkuThresholds.xml"
+		[string]$DefaultReceipient
 	)
 
 	$result = ""
 
-	$xmlDoc = LoadXmlDocument -Filename $ThresholdFile
-	$xmlRoot = $xmlDoc.DocumentElement
+	$camlQuery = "<Eq><FieldRef Name='Title' /><Value Type'Text'>$Sku</Value></Eq>"
 
-	$xpath = "//SkuThresholds/Sku[@Name='$Sku']"
-	$node = $xmlRoot.SelectSingleNode($xpath)
+	$items = GetListItems -Listname "Sku Thresholds" -WhereNode $camlQuery
 
-	if ($node -eq $null)
+	if ($items -ne $null)
 	{
-		Write-Host -ForegroundColor Red "Sku $Sku not found in threshold file $ThresholdFile"
-	}
-	else
-	{
-		$result = $node.Receipient
+		$result = $items["Receipient"]
+
+		if ($result -eq "")
+		{
+			$result = $DefaultReceipient
+		}
 	}
 
 	return $result
+}
+
+<#
+ run a query on a list an return the result set
+#>
+function GetListItems
+{
+	param (
+		[string]$Listname,
+		[string]$WhereNode
+	)
+
+	$camlQuery = "<View><Query><Where>$WhereNode</Where></Query></View>"
+
+	$result = Get-PnPListItem -List $Listname -Query $camlQuery
+
+    return $result
 }
 
 #------- Main -------

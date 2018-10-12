@@ -29,9 +29,16 @@
   <ItemGroup>
     <Folder Include="Iteration1\" />
     <Folder Include="Iteration1\Columns\" />
+    <Folder Include="Iteration2\" />
+    <Folder Include="Iteration2\Columns\" />
+    <Folder Include="PowerShellFunc\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeployAll.ps1" />
     <Compile Include="Iteration1\CreateList.ps1" />
+    <Compile Include="Iteration2\Columns\Receipient.xml" />
+    <Compile Include="Iteration2\CreateLists.ps1" />
+    <Compile Include="PowerShellFunc\PowerShellFunc.ps1" />
     <Compile Include="PrepareFieldsForSku.ps1" />
     <Compile Include="ReadAccountSkuFromTenant.ps1" />
     <Compile Include="RunLicenseTracking.ps1" />
@@ -41,6 +48,12 @@
     <Content Include="FieldMappings.xml" />
     <Content Include="FieldTemplate.xml" />
     <Content Include="Iteration1\Columns\CheckDate.xml" />
+    <Content Include="Iteration2\Columns\DisplayName.xml" />
+    <Content Include="Iteration2\Columns\FieldId.xml" />
+    <Content Include="Iteration2\Columns\FieldNumber.xml" />
+    <Content Include="Iteration2\Columns\InternalName.xml" />
+    <Content Include="Iteration2\Columns\FriendlyName.xml" />
+    <Content Include="Iteration2\Columns\Threshold.xml" />
     <Content Include="LicenseTrackingParam.xml" />
     <Content Include="SkuThresholds.xml" />
   </ItemGroup>

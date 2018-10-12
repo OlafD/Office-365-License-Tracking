@@ -1,0 +1,12 @@
+<Field
+	ID="{eeafc1e6-9be5-475d-bb32-ffbc0f4c8f3f}"
+	Type="Text"
+	Name="FriendlyName"
+	DisplayName="Friendly Name"
+	StaticName="FriendlyName"
+	Group=""
+	Description=""
+  ShowInNewForm="TRUE"
+  ShowInEditForm="TRUE"
+	Hidden="false">
+</Field>

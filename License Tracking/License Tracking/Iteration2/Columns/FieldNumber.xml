@@ -1,0 +1,13 @@
+<Field
+	ID="{d45baf6d-dbbe-4254-9bcd-0e70d163879d}"
+	Type="Number"
+	Name="FieldNumber"
+	DisplayName="FieldNumber"
+	StaticName="FieldNumber"
+	Group=""
+	Description=""
+  Decimals="0"
+  ShowInNewForm="FALSE"
+  ShowInEditForm="FALSE"
+	Hidden="false">
+</Field>

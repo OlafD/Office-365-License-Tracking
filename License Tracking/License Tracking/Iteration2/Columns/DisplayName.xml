@@ -1,0 +1,12 @@
+<Field
+	ID="{097de597-8757-4aa6-b138-5ad7cf631562}"
+	Type="Text"
+	Name="DisplayName"
+	DisplayName="DisplayName"
+	StaticName="DisplayName"
+	Group=""
+	Description=""
+  ShowInNewForm="FALSE"
+  ShowInEditForm="FALSE"
+	Hidden="false">
+</Field>
