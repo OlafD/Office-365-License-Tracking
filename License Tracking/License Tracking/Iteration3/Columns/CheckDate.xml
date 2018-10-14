@@ -1,0 +1,11 @@
+  <Field
+       ID="{0d1b600f-e9f9-48e8-a38b-11123c362bed}"
+       Name="CheckDate"
+       StaticName="CheckDate"
+       DisplayName="Check Date"
+       Type ="DateTime"
+       Format ="DateOnly"
+       Required="TRUE"
+       Description=""
+       Group="License Tracking">
+  </Field>

@@ -1,0 +1,14 @@
+<Field
+	ID="{24e0a0ff-694c-4979-a1a8-c60c4ea56932}"
+	Type="Number"
+	Name="Current"
+	DisplayName="Current"
+	StaticName="Current"
+	Group="License Tracking"
+	Description=""
+	Hidden="false"
+	ShowInNewForm="FALSE"
+	ShowInEditForm="FALSE"
+	Decimals="0">
+	<Default>0</Default>
+</Field>

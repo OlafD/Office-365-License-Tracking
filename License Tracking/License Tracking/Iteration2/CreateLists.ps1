@@ -15,10 +15,10 @@ Invoke-PnPQuery
 
 $f = Rename-Field -List $listname -Identity "Title" -NewValue "SkuPartNumber"
 
-$f = Add-PBFieldToList -Path .\Columns\DisplayName.xml -List $listname
-$f = Add-PBFieldToList -Path .\Columns\InternalName.xml -List $listname
-$f = Add-PBFieldToList -Path .\Columns\FieldId.xml -List $listname
-$f = Add-PBFieldToList -Path .\Columns\FieldNumber.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\DisplayName.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\InternalName.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\FieldId.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\FieldNumber.xml -List $listname
 
 $view = Get-PnPView -List $listname -Includes ViewFields
 $view.ViewFields.Add("DisplayName")
@@ -49,9 +49,9 @@ Invoke-PnPQuery
 
 $f = Rename-Field -List $listname -Identity "Title" -NewValue "SkuPartNumber"
 
-$f = Add-PBFieldToList -Path .\Columns\FriendlyName.xml -List $listname
-$f = Add-PBFieldToList -Path .\Columns\Threshold.xml -List $listname
-$f = Add-PBFieldToList -Path .\Columns\Receipient.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\FriendlyName.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\Threshold.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\Receipient.xml -List $listname
 
 $view = Get-PnPView -List $listname -Includes ViewFields
 $view.ViewFields.Add("FriendlyName")

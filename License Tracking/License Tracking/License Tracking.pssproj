@@ -31,6 +31,8 @@
     <Folder Include="Iteration1\Columns\" />
     <Folder Include="Iteration2\" />
     <Folder Include="Iteration2\Columns\" />
+    <Folder Include="Iteration3\" />
+    <Folder Include="Iteration3\Columns\" />
     <Folder Include="PowerShellFunc\" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +40,11 @@
     <Compile Include="Iteration1\CreateList.ps1" />
     <Compile Include="Iteration2\Columns\Receipient.xml" />
     <Compile Include="Iteration2\CreateLists.ps1" />
+    <Compile Include="Iteration3\CreateList.ps1" />
+    <Compile Include="Iteration3\PrepareFieldsForSku.ps1" />
+    <Compile Include="Iteration3\ReadAccountSkuFromTenant.ps1" />
+    <Compile Include="Iteration3\RunLicenseTracking.ps1" />
+    <Compile Include="Iteration3\SendMail.ps1" />
     <Compile Include="PowerShellFunc\PowerShellFunc.ps1" />
     <Compile Include="PrepareFieldsForSku.ps1" />
     <Compile Include="ReadAccountSkuFromTenant.ps1" />
@@ -54,6 +61,12 @@
     <Content Include="Iteration2\Columns\InternalName.xml" />
     <Content Include="Iteration2\Columns\FriendlyName.xml" />
     <Content Include="Iteration2\Columns\Threshold.xml" />
+    <Content Include="Iteration3\Columns\CheckDate.xml" />
+    <Content Include="Iteration3\Columns\Available.xml" />
+    <Content Include="Iteration3\Columns\Threshold.xml" />
+    <Content Include="Iteration3\Columns\Current.xml" />
+    <Content Include="Iteration3\FieldTemplate.xml" />
+    <Content Include="Iteration3\LicenseTrackingParam.xml" />
     <Content Include="LicenseTrackingParam.xml" />
     <Content Include="SkuThresholds.xml" />
   </ItemGroup>

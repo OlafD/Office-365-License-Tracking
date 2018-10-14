@@ -1,0 +1,14 @@
+<Field
+	ID="{914638c3-6345-4336-8c36-1d6bcf320bf1}"
+	Type="Number"
+	Name="Threshold"
+	DisplayName="Threshold"
+	StaticName="Threshold"
+	Group="License Tracking"
+	Description=""
+	Hidden="false"
+	ShowInNewForm="FALSE"
+	ShowInEditForm="FALSE"
+	Decimals="0">
+	<Default>0</Default>
+</Field>

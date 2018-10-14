@@ -39,9 +39,15 @@ cd .\Iteration1
 
 Write-Host "Iteration2"
 
-cd ..\Iteration1
+cd ..\Iteration2
 
 . .\CreateLists.ps1
+
+Write-Host "Iteration2"
+
+cd ..\Iteration3
+
+. .\CreateList.ps1
 
 #endregion
 

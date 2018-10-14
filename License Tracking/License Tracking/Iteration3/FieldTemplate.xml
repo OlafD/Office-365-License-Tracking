@@ -1,0 +1,14 @@
+<Field
+	ID="{74bf48f8-24f9-4c91-a001-ffd92e2129ac}"
+	Type="Number"
+	Name="Template"
+	DisplayName="Template"
+	StaticName="Template"
+	Group="License Tracking"
+	Description=""
+	Hidden="false"
+	ShowInNewForm="FALSE"
+	ShowInEditForm="FALSE"
+	Decimals="0">
+	<Default>0</Default>
+</Field>

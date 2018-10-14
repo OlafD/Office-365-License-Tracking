@@ -1,0 +1,14 @@
+<Field
+	ID="{eee12828-a4c2-463f-b799-6972de68b0cb}"
+	Type="Number"
+	Name="Available"
+	DisplayName="Available"
+	StaticName="Available"
+	Group="License Tracking"
+	Description=""
+	Hidden="false"
+	ShowInNewForm="FALSE"
+	ShowInEditForm="FALSE"
+	Decimals="0">
+	<Default>0</Default>
+</Field>

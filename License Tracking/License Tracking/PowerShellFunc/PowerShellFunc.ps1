@@ -96,3 +96,98 @@ Function Rename-Field
 		$ctx.ExecuteQuery()
 	}
 }
+
+Function Add-FieldToList()
+{
+<#
+	.SYNOPSIS
+	Add a field to the columns in a list.
+
+	.DESCRIPTION
+	This function uses the cmdlet Add-PnPFieldFromXml from the Office 365 PnP PowerShell extension
+	to add a new field to a list. The parameters for the field are taken from an xml-file, the 
+	filename is passed as the parameter.
+
+	.PARAMETER List
+	The name of the list, where the new field should be added
+
+	.PARAMETER Path
+	The path to the xml-file with the parameters for the new field
+
+	.NOTES
+	no notes available
+
+	.LINK
+	no link available
+
+	.EXAMPLE
+	$field = Add-FieldToList -List "Documents" -Path "C:\Columns\Status.xml"
+
+#>
+
+	param(
+		[Parameter(Mandatory=$true)]
+		[string]$List,
+		[Parameter(Mandatory=$true)]
+		[string]$Path
+	)
+
+	if ((TestSPOConnection) -eq $false)
+	{
+		Write-Error "No connection to SharePoint"
+
+		break
+	}
+
+	$content = Get-Content $Path
+
+	$contentAsString = [string]$content
+
+	$field = Add-PnPFieldFromXml -List $List -FieldXml $contentAsString
+
+	return $field
+}
+
+Function Set-ShowInForm
+{
+	param (
+		[Parameter(Mandatory=$true)]
+		[string]$Listname,
+		[Parameter(Mandatory=$true)]
+		[string]$Identity,
+		[Parameter(Mandatory=$true)]
+		[ValidateSet("New", "Edit", "Display")]
+		[string]$FormType,
+		[Parameter(Mandatory=$true)]
+		[bool]$Value
+	)
+
+	$field = Get-PnPField -List $Listname -Identity $Identity -ErrorAction SilentlyContinue
+
+	if ($field -eq $null)
+	{
+		Write-Host -ForegroundColor Red "Cannot find field '$Identity' in list '$Listname'."
+	}
+	else
+	{
+		switch ($FormType)
+		{
+			"New" 
+			{
+				$field.SetShowInNewForm($Value)
+				$field.Update()
+				Invoke-PnPQuery
+			}
+			"Edit" { 
+				$field.SetShowInEditForm($Value)
+				$field.Update()
+				Invoke-PnPQuery
+			}
+			"Display" {
+				$field.SetShowInDisplayForm($Value)
+				$field.Update()
+				Invoke-PnPQuery
+			}
+		}
+	}
+}

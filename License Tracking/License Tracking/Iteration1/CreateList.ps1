@@ -1,9 +1,10 @@
 
-Import-Module PBSPOPS
+. ..\PowerShellFunc\PowerShellFunc.ps1
 
-if ((Test-PBSPOConnection) -eq $false)
+if ((TestSPOConnection) -eq $false)
 {
 	Write-Host -ForegroundColor Red "No connection to a SharePoint Online site collection. Processing stopped."
+
 	Exit
 }
 
@@ -19,7 +20,7 @@ $list.ListExperienceOptions = "ClassicExperience"
 $list.Update()
 Invoke-PnPQuery
 
-$f = Add-PBFieldToList -Path .\Columns\CheckDate.xml -List $listname
+$f = Add-FieldToList -Path .\Columns\CheckDate.xml -List $listname
 
 $view = Get-PnPView -List $listname -Includes ViewFields
 $view.ViewFields.Add("CheckDate")

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LicenseTracking>
+  <!-- Url of the SharePoint site collection, where the data should be stored -->
+  <Url>https://your_tenant_here.sharepoint.com/sites/LicenseAlerting</Url>
+  <!-- Name of the list in the SharePoint site collection, where the data should be stored -->
+  <Listname>License Tracking</Listname>
+  <!-- Path for the transcript files -->
+  <TranscriptPath>C:\Transcripts</TranscriptPath>
+  <!-- the default receipient for mails -->
+  <DefaultReceipient>LicenseAlerting@M365x877207.onmicrosoft.com</DefaultReceipient>
+  <!-- address for the smtp server to use for sending mails -->
+  <SmtpServer>smtp.office365.com</SmtpServer>
+  <!-- port number for the smtp server to use for sending mails -->
+  <SmtpPort>587</SmtpPort>
+</LicenseTracking>
