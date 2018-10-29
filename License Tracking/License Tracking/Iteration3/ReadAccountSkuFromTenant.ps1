@@ -300,7 +300,7 @@ else
 
 	$receipient = GetDefaultReceipient
 
-	. .\SendMail.ps1 -MailType SkuAlert -SkuToNotify $skuToNotify -Receipient $receipient -Credentials $Credentials
+	. .\SendMail.ps1 -MailType SkuAlert -SkuToNotify $skuToNotify -Credentials $Credentials
 }
 
 Write-Host -ForegroundColor Green "Done."
