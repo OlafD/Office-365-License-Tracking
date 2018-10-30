@@ -298,18 +298,18 @@ switch ($MailType)
 	}
 }
  
-Write-Host "Send mail to $Receipient"
- 
 $smtpServer = GetValueFromXml -NodeName "SmtpServer"
 $smtpPort = GetValueFromXml -NodeName "SmtpPort"
 $from = GetValueFromXml "MailFrom"
 $receipients = GetReceipients
 
-$receipients
+Write-Host "Send mail to: $receipients"
 
 if ($receipients.Count -gt 0)
 {
 	Send-MailMessage -From $from -To $receipients -Subject $subject -Body $body -BodyAsHtml -SmtpServer $smtpServer -Port $smtpPort -Credential $Credentials -UseSsl
+
+	Write-Host "Mail sent."
 } 
 else
 {
