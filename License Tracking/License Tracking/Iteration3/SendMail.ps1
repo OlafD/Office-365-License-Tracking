@@ -11,7 +11,7 @@ $NEW_SKU_SUBJECT = "New Sku in license alerting"
 $NEW_SKU_BODY = @"
 <div>Hello,</div>
 <br />
-<div>this automatic E-mail is send to you as an alert notification for a new Sku in the SkuThresholds.xml for the license alerting. The following Sku(s) were added:</div>
+<div>this automatic E-mail is send to you as a notification for a new Sku in the Sku Thresholds list in [*url_placeholder*] for the license alerting. The following Sku(s) were added:</div>
 <br />
 <ul>
 [*license_placeholder*]
@@ -263,6 +263,13 @@ function GetReceipients
 	return $result
 } 
 
+function GetUrlPlaceholder
+{
+	$web = Get-PnPWeb
+
+	return $web.Url
+}
+
 #------- Main -------
  
 if ((TestSPOConnection) -eq $false)
@@ -273,20 +280,22 @@ if ((TestSPOConnection) -eq $false)
  
 switch ($MailType)
 {
-       "SkuAlert"
-       {
-             $placeholderValue = CreateSkuAlertPlaceholder -SkuToNotify $SkuToNotify
-             $body = $SKU_ALERT_BODY.Replace("[*license_placeholder*]", $placeholderValue)
-             $subject = $SKU_ALERT_SUBJECT
-             break;
-       }
-       "NewSku"
-       {
-             $placeholderValue = CreateNewSkuPlaceholder -SkuToNotify $SkuToNotify
-             $body = $NEW_SKU_BODY.Replace("[*license_placeholder*]", $placeholderValue)
-             $subject = $NEW_SKU_SUBJECT
-             break;
-       }
+	"SkuAlert"
+	{
+		$placeholderValue = CreateSkuAlertPlaceholder -SkuToNotify $SkuToNotify
+		$body = $SKU_ALERT_BODY.Replace("[*license_placeholder*]", $placeholderValue)
+		$subject = $SKU_ALERT_SUBJECT
+		break;
+	}
+	"NewSku"
+	{
+		$url = GetUrlPlaceholder
+		$placeholderValue = CreateNewSkuPlaceholder -SkuToNotify $SkuToNotify
+		$body = $NEW_SKU_BODY.Replace("[*license_placeholder*]", $placeholderValue)
+		$body = $body.Replace("[*url_placeholder*]", $url)
+		$subject = $NEW_SKU_SUBJECT
+		break;
+	}
 }
  
 Write-Host "Send mail to $Receipient"

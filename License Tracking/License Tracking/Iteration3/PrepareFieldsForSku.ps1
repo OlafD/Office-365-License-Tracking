@@ -373,7 +373,7 @@ if ($newSkuNotification.Count -gt 0)
 {
 	$receipient = GetDefaultReceipient
 
-	. .\SendMail.ps1 -MailType NewSku -SkuToNotify $newSkuNotification -Receipient $receipient -Credentials $Credentials
+	. .\SendMail.ps1 -MailType NewSku -SkuToNotify $newSkuNotification -Credentials $Credentials
 }
 
 Write-Host -ForegroundColor Green "Done."
