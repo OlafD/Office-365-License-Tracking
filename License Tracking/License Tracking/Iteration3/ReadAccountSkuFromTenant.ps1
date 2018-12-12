@@ -97,7 +97,7 @@ function TestThresholdForSku
 		[int]$CurrentUnits
 	)
 
-	$result = 0
+	$result = $null
 
 	$camlQuery = "<Eq><FieldRef Name='Title' /><Value Type='Text'>$Sku</Value></Eq>"
 
@@ -263,7 +263,7 @@ foreach ($accountSku in $accountSkuCollection)
 
 	$thresholdTest = TestThresholdForSku -Sku $skuPartNumber -AcvailableUnits $availableUnits -CurrentUnits $currentUnits 
 
-	if ($thresholdTest -gt 0)
+	if ($thresholdTest -ne $null)
 	{
 		$skuToNotify.Add($skuPartNumber, $thresholdTest)
 
